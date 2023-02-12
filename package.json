@@ -1,5 +1,5 @@
 {
-  "name": "Loom_funiture",
+  "name": "LoomFuniture",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -9,8 +9,10 @@
     "lint": "eslint ../../Downloads/vue-alt-main --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "axios": "^1.2.2",
     "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
