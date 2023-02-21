@@ -5,34 +5,69 @@
         <div class="column -size-3">
           <p class="products-view__filter-title">Filtre par pièce</p>
           <div class="products-view__checkbox">
-            <input v-model="filters" type="checkbox" id="cuisine" name="cuisine" value="cuisine">
+            <input
+              v-model="filters"
+              type="checkbox"
+              id="cuisine"
+              name="cuisine"
+              value="cuisine"
+            />
             <label class="products-view__label" for="cuisine">Cuisine</label>
           </div>
           <div class="products-view__checkbox">
-            <input v-model="filters" type="checkbox" id="chambre" name="chambre" value="chambre">
+            <input
+              v-model="filters"
+              type="checkbox"
+              id="chambre"
+              name="chambre"
+              value="chambre"
+            />
             <label class="products-view__label" for="chambre">Chambre</label>
           </div>
           <div class="products-view__checkbox">
-            <input v-model="filters" type="checkbox" id="salon-sejour" name="salon-sejour" value="salon-sejour">
-            <label class="products-view__label" for="salon-sejour">Salon/Séjour</label>
+            <input
+              v-model="filters"
+              type="checkbox"
+              id="salon-sejour"
+              name="salon-sejour"
+              value="salon-sejour"
+            />
+            <label class="products-view__label" for="salon-sejour"
+              >Salon/Séjour</label
+            >
           </div>
           <p class="products-view__filter-title">Filtre par prix</p>
-          <input v-model="price" type="range" min="0" max="2000">
-          <br>
+          <input v-model="price" type="range" min="0" max="2000" />
+          <br />
           {{ price }}
         </div>
         <div class="column -size-9">
           <h1 class="products-view__title">Mes produits</h1>
           <div class="products-view__list">
             <div class="row">
-              <div class="column -size-3" v-for="(product, index) in displayedProducts" :key="index">
-                <Product :name="product.name" :slug="product.slug" :price="product.price" :images="product.images" />
+              <div
+                class="column -size-3"
+                v-for="(product, index) in displayedProducts"
+                :key="index"
+              >
+                <Product
+                  :name="product.name"
+                  :slug="product.slug"
+                  :price="product.price"
+                  :images="product.images"
+                />
               </div>
             </div>
           </div>
           <div class="products-view__pagination">
-            <span class="products-view__pagination-button" @click="onPreviousClick">Page précédente</span>
-            <span class="products-view__pagination-button" @click="onNextClick">Page suivante</span>
+            <span
+              class="products-view__pagination-button"
+              @click="onPreviousClick"
+              >Page précédente</span
+            >
+            <span class="products-view__pagination-button" @click="onNextClick"
+              >Page suivante</span
+            >
           </div>
         </div>
       </div>
@@ -45,64 +80,71 @@ import { client } from "@/utils/axios";
 import Product from "@/components/Product.vue";
 export default {
   components: { Product },
-  data () {
+  data() {
     return {
       products: [],
       filters: [],
       price: null,
       page: 0,
-      byPage: 4
-    }
+      byPage: 4,
+    };
   },
   watch: {
     // filteredProducts (value) {
     //   this.page = 0
     // }
-    'filteredProducts': 'onFilteredProductsChange'
+    filteredProducts: "onFilteredProductsChange",
   },
   computed: {
     // Filtered array based on this.products and this.filters
-    filteredProducts () {
+    filteredProducts() {
       // If no filters selected
-      if (!this.filters.length && !this.price) return this.products
-      return this.products.filter((product) => {
-        // At least one filter selected
-        return product.categories.find(category => this.filters.includes(category.slug))
-      }).filter((product) => {
-        // Price is not null -> apply price filter
-        if (!this.price) return product
-        return parseInt(product.price) <= parseInt(this.price)
-      })
+      if (!this.filters.length && !this.price) return this.products;
+      return this.products
+        .filter((product) => {
+          // At least one filter selected
+          return product.categories.find((category) =>
+            this.filters.includes(category.slug)
+          );
+        })
+        .filter((product) => {
+          // Price is not null -> apply price filter
+          if (!this.price) return product;
+          return parseInt(product.price) <= parseInt(this.price);
+        });
     },
     // Sliced array of products based on filteredProducts
     // Handles pagination
-    displayedProducts () {
-      const nextPage = this.page + 1
-      return this.filteredProducts.slice(this.page * this.byPage, nextPage * this.byPage)
-    }
+    displayedProducts() {
+      const nextPage = this.page + 1;
+      return this.filteredProducts.slice(
+        this.page * this.byPage,
+        nextPage * this.byPage
+      );
+    },
   },
-  async mounted () {
+  async mounted() {
     // Get all woocommerce products
-    const productResponse = await client.get("/wc/v3/products")
-    this.products = productResponse.data
+    const productResponse = await client.get("/wc/v3/products");
+    this.products = productResponse.data;
   },
   methods: {
     // Go to previous page if not first one
-    onPreviousClick () {
-      if (this.page === 0) return
-      this.page = this.page - 1
+    onPreviousClick() {
+      if (this.page === 0) return;
+      this.page = this.page - 1;
     },
     // Go to next page if not last one
-    onNextClick () {
-      const pageCount = Math.ceil(this.filteredProducts.length / this.byPage)
-      if (this.page >= pageCount - 1) return
-      this.page = this.page + 1
+    onNextClick() {
+      const pageCount = Math.ceil(this.filteredProducts.length / this.byPage);
+      if (this.page >= pageCount - 1) return;
+      this.page = this.page + 1;
     },
     // Triggered when this.filteredProducts value changes
-    onFilteredProductsChange () {
-      this.page = 0
-    }
-  }
+    onFilteredProductsChange() {
+      this.page = 0;
+    },
+  },
 };
 </script>
 

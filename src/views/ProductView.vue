@@ -13,16 +13,25 @@
             <div v-if="product.dimensions" class="product-view__dimensions">
               <p class="product-view__subtitle">Dimensions du produit :</p>
               <ul>
-                <li class="product-view__dimensions-item">Longueur : {{ product.dimensions.length }}cm</li>
-                <li class="product-view__dimensions-item">Largeur : {{ product.dimensions.width }}cm</li>
-                <li class="product-view__dimensions-item">Hauteur : {{ product.dimensions.height }}cm</li>
+                <li class="product-view__dimensions-item">
+                  Longueur : {{ product.dimensions.length }}cm
+                </li>
+                <li class="product-view__dimensions-item">
+                  Largeur : {{ product.dimensions.width }}cm
+                </li>
+                <li class="product-view__dimensions-item">
+                  Hauteur : {{ product.dimensions.height }}cm
+                </li>
               </ul>
             </div>
             <p class="product-view__subtitle">Description du produit :</p>
-            <div class="product-view__description-content" v-html="product.short_description" />
+            <div
+              class="product-view__description-content"
+              v-html="product.short_description"
+            />
           </div>
           <div @click="addToCart">
-            <MyButton :text="'Ajouter au panier'"/>
+            <MyButton :text="'Ajouter au panier'" />
           </div>
         </div>
       </div>
@@ -41,9 +50,9 @@ export default {
     return {
       product: {},
       quantity: {
-        type:String,
-        default: 1
-      }
+        type: String,
+        default: 1,
+      },
     };
   },
   async mounted() {
@@ -62,9 +71,9 @@ export default {
     },
 
     addToCart() {
-      this.$store.commit('add', this.product)
-    }
-  }
+      this.$store.commit("add", this.product);
+    },
+  },
 };
 </script>
 
@@ -94,7 +103,7 @@ export default {
     font-weight: 700;
   }
 
-  &__gallery{
+  &__gallery {
     width: 100px;
   }
 }

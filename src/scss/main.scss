@@ -1,5 +1,7 @@
 @import "variables";
 @import "typography";
+@import "functions";
+@import "mixins";
 
 body {
   margin: 0;
@@ -9,4 +11,8 @@ body {
 ul {
   list-style: none;
   margin: 0;
+}
+
+*{
+  box-sizing: border-box;
 }

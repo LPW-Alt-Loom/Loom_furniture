@@ -1,8 +1,8 @@
 <template>
-  <div v-for="(product,index) in products" :key="index">
-    {{$route.params}}
+  <div v-for="(product, index) in products" :key="index">
+    {{ $route.params }}
     <div>
-      <img v-if="product.images.length" :src="product.images[0].src" alt="">
+      <img v-if="product.images.length" :src="product.images[0].src" alt="" />
 
       <p>{{ product.name }}</p>
 
@@ -12,44 +12,47 @@
 </template>
 
 <script>
-
 import { client } from "@/utils/axios.js";
-
 export default {
   name: "CategoryView",
-  data () {
+  data() {
     return {
       products: [],
-      category: []
-
-    }
-    },
+      category: [],
+    };
+  },
   async mounted() {
+    const categoryResponse = await client.get(
+      "wc/v3/products/categories?slug=" + this.$route.params.category
+    );
 
-    const categoryResponse = await client.get('wc/v3/products/categories?slug='+ this.$route.params.category)
+    this.category = categoryResponse.data;
 
-    this.category = categoryResponse.data
+    const response = await client.get(
+      "wc/v3/products?category=" + this.category[0].id
+    );
 
-    const response = await client.get('wc/v3/products?category=' + this.category[0].id)
-
-    this.products = response.data
+    this.products = response.data;
   },
 
-  async beforeRouteUpdate (to) {
-    const categoryResponse = await client.get('wc/v3/products/categories?slug='+ to.params.category)
+  async beforeRouteUpdate(to) {
+    const categoryResponse = await client.get(
+      "wc/v3/products/categories?slug=" + to.params.category
+    );
 
-    this.category = categoryResponse.data
+    this.category = categoryResponse.data;
 
-    const response = await client.get('wc/v3/products?category=' + this.category[0].id)
+    const response = await client.get(
+      "wc/v3/products?category=" + this.category[0].id
+    );
 
-    this.products = response.data
-  }
+    this.products = response.data;
+  },
 };
 </script>
 
 <style scoped>
-img{
+img {
   width: 100px;
 }
-
 </style>
