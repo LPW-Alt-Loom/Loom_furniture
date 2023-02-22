@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { client } from "@/utils/axios";
+import { wooCommerce } from "@/utils/axios";
 import ProductGallery from "@/components/ProductGallery.vue";
 import MyButton from "@/components/MyButton.vue";
 
@@ -66,7 +66,7 @@ export default {
   methods: {
     // Get WooCommerce product data by slug
     async getProductData(slug) {
-      const response = await client.get("wc/v3/products?slug=" + slug);
+      const response = await wooCommerce.get("wc/v3/products?slug=" + slug);
       this.product = response.data[0];
     },
 

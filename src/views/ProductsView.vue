@@ -76,8 +76,8 @@
 </template>
 
 <script>
-import { client } from "@/utils/axios";
-import Product from "@/components/Product.vue";
+import { wooCommerce } from "@/utils/axios";
+import Product from "@/components/ProductCard.vue";
 export default {
   components: { Product },
   data() {
@@ -125,7 +125,7 @@ export default {
   },
   async mounted() {
     // Get all woocommerce products
-    const productResponse = await client.get("/wc/v3/products");
+    const productResponse = await wooCommerce.get("/wc/v3/products");
     this.products = productResponse.data;
   },
   methods: {

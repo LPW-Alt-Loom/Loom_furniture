@@ -19,11 +19,9 @@ export default {
 <style lang="scss" scoped>
 .button {
   display: block;
-  width: 413px;
-  text-decoration: none;
+  width: 100%;
   padding: rem(15);
-  font-size: rem(20);
-  font-family: "Krylon", sans-serif;
+  @include button;
   text-align: center;
   &.-primary {
     background-color: $primary-color;
@@ -39,7 +37,7 @@ export default {
     border: 1px solid $primary-color;
   }
   &.-outline_white {
-    background-color: $white;
+    background-color: transparent;
     color: $white;
     border: 1px solid $white;
   }

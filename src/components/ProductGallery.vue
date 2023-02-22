@@ -1,12 +1,22 @@
 <template>
   <div v-if="active" class="product-gallery">
     <!-- Image active -->
-    <div class="product-gallery__image" :style="`background-image: url('${active.src}')`" />
+    <div
+      class="product-gallery__image"
+      :style="`background-image: url('${active.src}')`"
+    />
     <!-- Liste d'images -->
     <div class="product-gallery__list">
       <div class="row">
-        <div v-for="(image) in images" class="column -size-3">
-          <div :class="['product-gallery__image', { '-is-active': active.id === image.id }]" :style="`background-image: url('${image.src}')`" @click="onImageClick(image)" />
+        <div v-for="image in images" class="column -size-3" :key="image.id">
+          <div
+            :class="[
+              'product-gallery__image',
+              { '-is-active': active.id === image.id },
+            ]"
+            :style="`background-image: url('${image.src}')`"
+            @click="onImageClick(image)"
+          />
         </div>
       </div>
     </div>
@@ -18,24 +28,24 @@ export default {
   props: {
     images: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
-  data () {
+  data() {
     return {
-      active: null
-    }
+      active: null,
+    };
   },
   watch: {
-    images (value) {
-      this.active = value[0]
-    }
+    images(value) {
+      this.active = value[0];
+    },
   },
   methods: {
-    onImageClick (image) {
-      this.active = image
-    }
-  }
+    onImageClick(image) {
+      this.active = image;
+    },
+  },
 };
 </script>
 

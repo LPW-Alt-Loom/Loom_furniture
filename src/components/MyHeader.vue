@@ -52,7 +52,7 @@
 
   &__navigation {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     padding-left: 50px;
   }
 
@@ -66,17 +66,12 @@
     &:not(:first-of-type) {
       margin-left: 20px;
     }
-  }
-
-  &__link {
-    text-decoration: none;
-  }
-}
-
-a:-webkit-any-link {
-  color: $white;
-  &:hover {
-    color: $toned-color;
+    :-webkit-any-link {
+      color: $white;
+      &:hover {
+        color: $toned-color;
+      }
+    }
   }
 }
 </style>
