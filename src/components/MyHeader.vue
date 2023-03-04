@@ -52,8 +52,9 @@
 
   &__navigation {
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row nowrap;
     padding-left: 50px;
+    list-style: none;
   }
 
   &__navigation-item {

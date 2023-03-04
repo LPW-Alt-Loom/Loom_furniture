@@ -23,6 +23,12 @@ const router = createRouter({
       component: () => import("../views/ProductsView.vue"),
     },
     {
+      path: "/cart",
+      name: "cart",
+
+      component: () => import("../views/CartView.vue"),
+    },
+    {
       path: "/products/:product",
       name: "products-product",
       component: () => import("../views/ProductView.vue"),
@@ -32,12 +38,6 @@ const router = createRouter({
       name: "category-category",
 
       component: () => import("../views/CategoryView.vue"),
-    },
-    {
-      path: "/cart",
-      name: "cart",
-
-      component: () => import("../views/CartView.vue"),
     },
   ],
 });

@@ -20,8 +20,9 @@ export default {
 .button {
   display: block;
   width: 100%;
-  padding: rem(15);
   @include button;
+  height: 50px;
+  padding: 15px;
   text-align: center;
   &.-primary {
     background-color: $primary-color;
@@ -29,6 +30,11 @@ export default {
   }
   &.-toned {
     background-color: $toned-color;
+    color: $black;
+    border: none;
+  }
+  &.-white {
+    background-color: $white;
     color: $primary-color;
   }
   &.-outline_primary {

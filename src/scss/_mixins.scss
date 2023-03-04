@@ -1,14 +1,25 @@
 @import "functions";
 
+@mixin title_40 {
+  font-family: "Krylon", sans-serif;
+  font-size: rem(40);
+  font-weight: 400;
+}
+
 @mixin product-card-title {
   font-family: "Krylon", sans-serif;
-  font-size: rem(30);
+  font-size: rem(36);
 
 }
 
 @mixin product-card-price {
   font-family: "pp_moriextralight", sans-serif;
   font-size: rem(20);
+}
+
+@mixin product-card-description {
+  font-family: "pp_moriextralight", sans-serif;
+  font-size: rem(16);
 }
 
 @mixin button {

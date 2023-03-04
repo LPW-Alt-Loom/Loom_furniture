@@ -29,6 +29,9 @@ export default {
   &.-big {
     font-size: rem(60);
     text-align: center;
+    margin-top: 0;
+    margin-bottom: 60px;
+    padding-top: 60px;
   }
   &.-big_corps {
     font-family: "pp_moriregular_italic", sans-serif;
@@ -43,6 +46,11 @@ export default {
   }
   &.-subtitle {
     @include subtitle;
+  }
+  &.-product_subtitle {
+    font-family: "pp_moriextralight", sans-serif;
+    font-size: rem(20);
+    line-height: 145%;
   }
   &.-h2_uppercase {
     text-transform: uppercase;

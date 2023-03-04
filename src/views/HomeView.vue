@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="home-view">
     <!--  Carousel  -->
     <div class="carousel">
       <img
@@ -23,66 +23,37 @@
     </div>
 
     <!--  Best saler  -->
-    <div class="products">
-      <MyTitle
-        type="h2_uppercase"
-        size="big"
-        text="Nos produits phares"
-        color="white"
-      />
-      <div class="products_list">
-        <div v-for="product in products" :key="product.id">
-          <ProductCard
-            :slug="product.slug"
-            :name="product.name"
-            :images="product.images"
-            :price="product.price"
-          />
-        </div>
-      </div>
-    </div>
+
+    <BestSalerProducts :products="products" title="Nos produits phares" />
 
     <!--  custom furniture  -->
     <CustomFurnitureCard />
 
-    <!--    &lt;!&ndash;  Catalogue  &ndash;&gt;-->
-    <!--    <div class="mb-5">-->
-    <!--      <h2 class="text-center mb-5">Catalogue</h2>-->
-    <!--      <div class="d-flex flex-wrap justify-content-evenly">-->
-    <!--        <div class="card">-->
-    <!--          <a href="https://placeholder.com"-->
-    <!--            ><img class="card-img" src="https://via.placeholder.com/200x300"-->
-    <!--          /></a>-->
-    <!--          <div class="card-img-overlay">-->
-    <!--            <p class="card-text">Coffee Tables</p>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        <div class="card">-->
-    <!--          <a href="https://placeholder.com"-->
-    <!--            ><img class="card-img" src="https://via.placeholder.com/200x300"-->
-    <!--          /></a>-->
-    <!--          <div class="card-img-overlay">-->
-    <!--            <p class="card-text">Console Tables</p>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        <div class="card">-->
-    <!--          <a href="https://placeholder.com"-->
-    <!--            ><img class="card-img" src="https://via.placeholder.com/200x300"-->
-    <!--          /></a>-->
-    <!--          <div class="card-img-overlay">-->
-    <!--            <p class="card-text">Side Tables</p>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        <div class="card">-->
-    <!--          <a href="https://placeholder.com"-->
-    <!--            ><img class="card-img" src="https://via.placeholder.com/200x300"-->
-    <!--          /></a>-->
-    <!--          <div class="card-img-overlay">-->
-    <!--            <p class="card-text">Plinths</p>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
+    <!--  Catalogue  -->
+    <div class="categories">
+      <MyTitle
+        color="black"
+        type="h2_uppercase"
+        text="Catalogue"
+        size="big"
+        class="categories_title"
+      />
+      <div class="categories_list">
+        <div
+          v-for="category in categories"
+          :key="category.id"
+          class="categories_list_category"
+        >
+          <a href="https://placeholder.com"
+            ><img
+              class="categories_list_category_image"
+              src="https://via.placeholder.com/200x300"
+              alt="oui"
+          /></a>
+          <p class="categories_list_category_title">{{ category.name }}</p>
+        </div>
+      </div>
+    </div>
 
     <!-- Materials -->
     <div class="section _primary">
@@ -105,7 +76,7 @@
             longue durée de vie et nous vous offrons également, une garantie à
             vie pour chaque meuble que vous achetez sur Loom Furnitures.
           </p>
-          <MyButton type="toned" text=">En savoir plus" link="/" />
+          <MyButton type="toned" text="En savoir plus" link="/" />
         </div>
       </div>
     </div>
@@ -174,81 +145,107 @@
   </main>
 </template>
 <style lang="scss">
-main {
+.home-view {
   background-color: $primary-color;
-}
+  .carousel {
+    position: relative;
 
-.carousel {
-  position: relative;
-  .carousel_img {
-    z-index: -1;
-    width: 100%;
-  }
-  .carousel_content {
-    left: 17%;
-    top: 30%;
-    position: absolute;
-    width: 350px;
-  }
-}
+    .carousel_img {
+      z-index: -1;
+      width: 100%;
+    }
 
-.products {
-  .products_list {
-    display: flex;
-    flex-flow: nowrap;
-    justify-content: space-evenly;
-  }
-}
-
-.section {
-  &._primary {
-    background-color: $primary-color;
-    p {
-      color: $white;
+    .carousel_content {
+      left: 17%;
+      top: 30%;
+      position: absolute;
+      width: 350px;
     }
   }
-  &._secondary {
-    background-color: $secondary-color;
-    p {
-      color: $white;
+
+  .section {
+    &._primary {
+      background-color: $primary-color;
+
+      p {
+        color: $white;
+      }
+    }
+
+    &._secondary {
+      background-color: $secondary-color;
+
+      p {
+        color: $white;
+      }
+    }
+
+    &._white {
+      background-color: $white;
+
+      p {
+        color: $black;
+      }
+    }
+
+    padding-bottom: 125px;
+
+    .grid {
+      display: grid;
+      max-width: 1100px;
+      min-height: 500px;
+      grid-template-columns: repeat(12, 8.33%);
+      margin: 0 auto;
+
+      p {
+        @include corps;
+      }
+
+      .col-left {
+        grid-column: 1/6;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: space-evenly;
+
+        * {
+          margin: 0;
+        }
+      }
+
+      .col-right {
+        grid-column: 7/13;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: space-evenly;
+
+        * {
+          margin: 0;
+        }
+      }
+
+      .thumbnail {
+        margin-top: -150px;
+      }
     }
   }
-  &._white {
+
+  .categories {
     background-color: $white;
-    p {
-      color: $black;
+    padding-bottom: rem(120);
+    &_title {
+      margin-bottom: rem(60);
+      margin-top: 0;
+      padding-top: rem(60);
     }
-  }
-  padding-bottom: 125px;
-  .grid {
-    display: grid;
-    max-width: 1100px;
-    min-height: 500px;
-    grid-template-columns: repeat(12, 8.33%);
-    margin: 0 auto;
-    p {
-      @include corps;
-    }
-    .col-left {
-      grid-column: 1/6;
+    &_list {
       display: flex;
-      flex-flow: column wrap;
-      justify-content: space-evenly;
-      * {
-        margin: 0;
-      }
-    }
-    .col-right {
-      grid-column: 7/13;
-      display: flex;
-      flex-flow: column wrap;
-      justify-content: space-evenly;
-      * {
-        margin: 0;
-      }
-    }
-    .thumbnail {
-      margin-top: -150px;
+      overflow-y: hidden;
+      overflow-x: scroll;
+      flex-flow: nowrap;
+      gap: 60px;
+      padding-bottom: rem(20);
+      padding-left: 80px;
+      margin-bottom: 10px;
     }
   }
 }
@@ -256,17 +253,17 @@ main {
 <script>
 import MyButton from "./../components/MyButton.vue";
 import MyTitle from "./../components/MyTitle.vue";
+import BestSalerProducts from "@/components/BestSalerProducts.vue";
 
 import { wooCommerce } from "@/utils/axios.js";
-import ProductCard from "@/components/ProductCard.vue";
 import CustomFurnitureCard from "@/components/CustomFurnitureCard.vue";
 
 export default {
   components: {
     CustomFurnitureCard,
-    ProductCard,
     MyButton,
     MyTitle,
+    BestSalerProducts,
   },
   data() {
     return {
@@ -277,13 +274,20 @@ export default {
     };
   },
   async mounted() {
-    const productResponse = await wooCommerce.get("wc/v3/products/");
-    this.products = productResponse.data;
+    // Get all woocommerce products
+    const productResponse = wooCommerce.get("/wc/v3/products");
+    const categoriesResponse = wooCommerce.get("/wc/v3/products/categories");
 
-    const categoryResponse = await wooCommerce.get(
-      "wc/v3/products/categories/"
-    );
-    this.categories = categoryResponse.data;
+    this.getRequest(productResponse, categoriesResponse).then((values) => {
+      // Utilisez les valeurs retournées ici
+      this.products = values[0].data;
+      this.categories = values[1].data;
+    });
+  },
+  methods: {
+    getRequest: async function (productResponse, categoriesResponse) {
+      return await Promise.all([productResponse, categoriesResponse]);
+    },
   },
 };
 </script>

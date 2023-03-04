@@ -32,11 +32,11 @@
 </template>
 <style lang="scss" scoped>
 .card {
-  max-width: 1300px;
+  max-width: 1700px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   background-color: $toned-color;
-  height: 600px;
+  height: 700px;
   margin: auto auto 125px;
   .card_body {
     * {

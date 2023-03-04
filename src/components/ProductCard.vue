@@ -3,8 +3,8 @@
     <RouterLink :to="`/products/${slug}`">
       <img v-if="image" class="product_image" :src="image" alt="" />
       <div class="product_content">
-        <p class="product_name">{{ name }}</p>
-        <span class="product_price">À partir de: {{ price }}£</span>
+        <p class="product_content_name">{{ name }}</p>
+        <span class="product_content_price">À partir de: {{ price }}£</span>
       </div>
     </RouterLink>
   </div>
@@ -55,16 +55,16 @@ export default {
   }
   &_content {
     padding: 20px;
-  }
-  &_name {
-    width: 100%;
-    @include product-card-title;
-    margin-top: 0;
-    margin-bottom: 30px;
-  }
-  &_price {
-    width: 100%;
-    @include product-card-price;
+    &_name {
+      width: 100%;
+      @include product-card-title;
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+    &_price {
+      width: 100%;
+      @include product-card-price;
+    }
   }
 }
 </style>
