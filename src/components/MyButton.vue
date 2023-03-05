@@ -13,7 +13,7 @@ export default {
 };
 </script>
 <template>
-  <a v-if="link" :href="link" :class="classname">{{ text }}</a>
+  <RouterLink v-if="link" :to="link" :class="classname">{{ text }}</RouterLink>
   <button v-else :class="classname">{{ text }}</button>
 </template>
 <style lang="scss" scoped>
