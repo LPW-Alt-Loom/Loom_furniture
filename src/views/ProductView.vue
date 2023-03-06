@@ -23,7 +23,7 @@
           type="h2"
           color="primary"
           size="product_subtitle"
-          :text="category"
+          :text="category + tags"
         />
         <span class="product-view_sku">{{ product.sku }}</span>
         <p class="product-view_content_promo_price">£{{ product.price }}</p>
@@ -42,6 +42,7 @@
         <div @click="addToCart">
           <MyButton
             type="toned"
+            link="/cart"
             :text="'Ajouter au panier'"
             class="product-view_content_addCart"
           />
@@ -108,16 +109,11 @@ export default {
     return {
       products: [],
       product: {},
-      quantity: {
-        type: String,
-        default: 1,
-      },
       category: "",
+      tags: "",
     };
   },
   async mounted() {
-    this.$store;
-
     await this.getProductData(this.$route.params.product);
 
     const productsResponse = await wooCommerce.get("wc/v3/products");
@@ -135,10 +131,14 @@ export default {
       this.product.categories.forEach((e) => {
         this.category = e.name;
       });
+
+      this.product.tags.forEach((e) => {
+        this.tags = this.tags + "  -  " + e.name;
+      });
     },
 
     addToCart() {
-      this.$store.commit("add", this.product);
+      this.$store.commit("add", { product: this.product, quantity: 1 });
     },
   },
 };

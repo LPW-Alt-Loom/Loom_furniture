@@ -33,6 +33,15 @@ export default {
     margin-bottom: 60px;
     padding-top: 60px;
   }
+  &.-cart_title {
+    font-size: rem(60);
+    margin-top: 0;
+    margin-bottom: 60px;
+  }
+  &.-order_title {
+    font-size: rem(60);
+    margin: 0;
+  }
   &.-big_corps {
     font-family: "pp_moriregular_italic", sans-serif;
     font-weight: 400;
