@@ -12,9 +12,7 @@
           >
         </li>
         <li class="header__navigation-item">
-          <RouterLink class="header__link" to="/views/CartView"
-            >Panier</RouterLink
-          >
+          <RouterLink class="header__link" to="/cart">Panier</RouterLink>
         </li>
         <li class="header__navigation-item">
           <RouterLink class="header__link" to="/products"

@@ -1,61 +1,141 @@
 <template>
-  <div class="cart-view">
-    <div class="container">
-      <h1 class="cart-view__title">Mon panier</h1>
-      <div v-if="$store.state.cart.length" class="cart-view__list">
+  <div v-if="$store.state.cart.length" class="cart">
+    <MyTitle type="h1" size="cart_title" color="primary" text="Panier" />
+    <div
+      class="cart_content"
+      v-for="(product, index) in $store.state.cart"
+      :key="index"
+    >
+      <div class="cart_content_image_section">
+        <img class="cart_content_image_src" :src="image.src" :alt="image.alt" />
+      </div>
+      <div class="cart_content_infos_product">
+        <MyTitle
+          type="h2"
+          text="Résumé de la commande"
+          color="primary"
+          size="medium"
+        />
+        <MyTitle size="small" color="primary" type="h3" text="Mon modèle" />
+        <span class="cart_content_infos_product_name">{{ product.name }}</span>
         <div
-          class="cart-view__item"
-          v-for="(product, index) in $store.state.cart"
-          :key="index"
+          v-if="product.dimensions"
+          class="cart_content_infos_product_dimensions"
         >
-          <CartProduct
-            :id="product.id"
-            :name="product.name"
-            :price="product.price"
-            :images="product.images"
-            :quantity="product.quantity"
+          <MyTitle
+            size="small"
+            color="primary"
+            type="h3"
+            text="Dimensions du produit"
           />
         </div>
-        <div class="cart-view__total">Total du panier : {{ cartTotal }}€</div>
-        <div class="cart-view__validate">
-          <MyButton :link="'/cart/order'">Valider le panier</MyButton>
-        </div>
+        <ul>
+          <li class="cart_content_infos_product_list-item">
+            Longueur : {{ product.dimensions.length }} cm
+          </li>
+          <li class="cart_content_infos_product_list-item">
+            Largeur : {{ product.dimensions.width }} cm
+          </li>
+          <li class="cart_content_infos_product_list-item">
+            Hauteur : {{ product.dimensions.height }} cm
+          </li>
+        </ul>
+        <span class="cart_content_infos_product_price">
+          Total : £{{ product.price }} TTC
+        </span>
+        <MyButton
+          text="Page produit"
+          :link="`/products/${product.slug}`"
+          type="primary"
+          class="cart_content_infos_product_button"
+        />
       </div>
-      <div v-else>Le panier est vide</div>
+      <div class="cart_content_infos_validation">
+        <MyButton text="Passer la commande" link="/cart/order" type="toned" />
+      </div>
     </div>
   </div>
+  <div v-else class="cart_empty">
+    <MyTitle size="big" color="primary" text="Le panier est vide" type="h1" />
+    <MyButton text="Retourner au catalogue" link="/products" type="primary" />
+  </div>
 </template>
-
 <script>
-import CartProduct from "@/components/CartProduct.vue";
+import MyTitle from "@/components/MyTitle.vue";
 import MyButton from "@/components/MyButton.vue";
 export default {
-  components: { MyButton, CartProduct },
+  components: {
+    MyTitle,
+    MyButton,
+  },
   computed: {
-    cartTotal() {
-      // New method to accumulate values
-      return this.$store.state.cart.reduce((total, product) => {
-        total += product.price * product.quantity;
-        return total;
-      }, 0);
+    image() {
+      if (!this.$store.state.cart[0].images.length) return;
+      return this.$store.state.cart[0].images[0];
     },
   },
 };
 </script>
-<style lang="scss">
-.cart-view {
-  &__list {
-  }
-  &__item {
-    &:not(:first-of-type) {
-      border-top: 1px solid black;
+<style lang="scss" scoped>
+.cart {
+  padding: 80px;
+  &_content {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(2, 1fr) auto;
+    gap: 20px;
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+    &_image {
+      &_section {
+        grid-column: 1 / span 8;
+        grid-row: 1 / span 3;
+        background-color: $grey;
+        padding: 60px;
+      }
+      &_src {
+        width: 100%;
+      }
+    }
+    &_infos {
+      &_product {
+        grid-column: 9 / span 4;
+        grid-row: 1 / span 2;
+        background-color: $grey;
+        padding: 60px;
+        display: flex;
+        justify-content: space-between;
+        flex-flow: column;
+        * {
+          margin: 0;
+        }
+        &_name {
+          font-family: "pp_moriextralight", sans-serif;
+          font-size: rem(20);
+          padding-left: 20px;
+        }
+        &_price {
+          font-family: "Krylon", sans-serif;
+          font-size: rem(30);
+        }
+        &_list-item {
+          @include corps;
+        }
+      }
+      &_validation {
+        grid-column: 9 / span 4;
+        grid-row: 3 / span 1;
+        background-color: $grey;
+        padding: 60px;
+      }
     }
   }
-  &__total {
-    font-size: 22px;
-    font-weight: 700;
-    margin: 30px 0 0 auto;
-    text-align: right;
-  }
+}
+
+.cart_empty {
+  margin: auto;
+  width: 500px;
 }
 </style>

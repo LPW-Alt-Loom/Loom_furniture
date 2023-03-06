@@ -18,8 +18,9 @@ export default createStore({
         state.cart.push({ ...product, quantity });
       } else {
         // If product is already in cart -> increase quantity
-        productInState.quantity += quantity;
+        alert("Il ne peuc y avoir q'un produit dans le panier");
       }
+
       localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     remove(state, id) {
@@ -28,30 +29,6 @@ export default createStore({
       );
       state.cart.splice(index, 1);
       localStorage.setItem("cart", JSON.stringify(state.cart));
-    },
-    updateQuantity(state, { id, action }) {
-      const productInState = state.cart.find(
-        (stateProduct) => stateProduct.id === id
-      );
-      if (action === "increase") {
-        productInState.quantity++;
-      } else if (action === "decrease") {
-        if (productInState.quantity > 1) {
-          productInState.quantity--;
-        }
-      }
-      localStorage.setItem("cart", JSON.stringify(state.cart));
-    },
-    emptyCart(state) {
-      state.cart = [];
-      localStorage.setItem("cart", JSON.stringify(state.cart));
-    },
-    increment(state, payload = 1) {
-      state.count += payload;
-    },
-    multiply(state, payload = 2) {
-      state.count *= payload;
-      // state.count = state.count * 2
     },
   },
 });
