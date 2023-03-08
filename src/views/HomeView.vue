@@ -2,11 +2,9 @@
   <main class="home-view">
     <!--  Carousel  -->
     <div class="carousel">
-      <img
-        src="https://via.placeholder.com/1900x900"
-        alt=""
-        class="carousel_img"
-      />
+      <div class="carousel_img">
+        <img src="/assets/images/carrousel_1.png" alt="carousel 1" />
+      </div>
       <div class="carousel_content">
         <MyTitle
           type="h1"
@@ -27,7 +25,7 @@
     <BestSalerProducts :products="products" title="Nos produits phares" />
 
     <!--  custom furniture  -->
-    <CustomFurnitureCard />
+    <CustomFurnitureCard class="custom_furniture" />
 
     <!--  Catalogue  -->
     <div class="categories">
@@ -59,7 +57,11 @@
     <div class="section _primary">
       <div class="grid">
         <div class="col-left">
-          <img class="thumbnail" src="https://via.placeholder.com/500" alt="" />
+          <img
+            class="thumbnail"
+            src="/assets/images/materials.png"
+            alt="Nos matériaux"
+          />
         </div>
         <div class="col-right">
           <MyTitle type="h2" size="medium" text="Nos matériaux" color="white" />
@@ -84,7 +86,7 @@
     <!-- Process  -->
     <div class="section _secondary">
       <div class="grid">
-        <div class="col-left">
+        <div class="col-text">
           <MyTitle
             type="h2"
             size="medium"
@@ -107,8 +109,12 @@
           </p>
           <MyButton type="primary" text="En savoir plus" link="/" />
         </div>
-        <div class="col-right">
-          <img class="thumbnail" src="https://via.placeholder.com/500" alt />
+        <div class="col-image">
+          <img
+            class="thumbnail"
+            src="/assets/images/process.png"
+            alt="Nos processus de fabrication"
+          />
         </div>
       </div>
     </div>
@@ -117,7 +123,11 @@
     <div class="section _white">
       <div class="grid">
         <div class="col-left">
-          <img class="thumbnail" src="https://via.placeholder.com/500" alt="" />
+          <img
+            class="thumbnail"
+            src="/assets/images/custom_section.png"
+            alt="main qui écrit sur un stylo"
+          />
         </div>
         <div class="col-right">
           <MyTitle
@@ -151,19 +161,56 @@
     position: relative;
 
     .carousel_img {
-      z-index: -1;
-      width: 100%;
+      img {
+        z-index: -1;
+        width: 100%;
+      }
     }
 
     .carousel_content {
-      left: 17%;
-      top: 30%;
+      left: 27%;
+      top: 33%;
       position: absolute;
-      width: 350px;
+      max-width: 350px;
+      @media screen and (max-width: 800px) {
+        h1 {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .categories {
+    background-color: $white;
+    padding-bottom: rem(200);
+    @media screen and (max-width: 800px) {
+      padding-bottom: 40px;
+    }
+    &_title {
+      margin-bottom: rem(60);
+      margin-top: 0;
+      padding-top: rem(60);
+    }
+    &_list {
+      display: flex;
+      overflow-y: hidden;
+      overflow-x: scroll;
+      flex-flow: nowrap;
+      gap: 60px;
+      padding-bottom: rem(20);
+      padding-left: 80px;
+      margin-bottom: 10px;
     }
   }
 
   .section {
+    padding: 20px 0 150px 0;
+    @media screen and (max-width: 800px) {
+      padding: 30px 20px;
+    }
+    &:last-child {
+      padding-bottom: 80px;
+    }
     &._primary {
       background-color: $primary-color;
 
@@ -188,24 +235,26 @@
       }
     }
 
-    padding-bottom: 125px;
-
     .grid {
       display: grid;
-      max-width: 1100px;
+      width: 100%;
       min-height: 500px;
-      grid-template-columns: repeat(12, 8.33%);
-      margin: 0 auto;
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: 20px;
 
       p {
         @include corps;
       }
 
       .col-left {
-        grid-column: 1/6;
+        grid-column: 3 / span 4;
         display: flex;
         flex-flow: column wrap;
         justify-content: space-evenly;
+        @media screen and (max-width: 800px) {
+          grid-column: 1 / span 12;
+          gap: 25px;
+        }
 
         * {
           margin: 0;
@@ -213,10 +262,42 @@
       }
 
       .col-right {
-        grid-column: 7/13;
+        grid-column: 8 / span 4;
         display: flex;
         flex-flow: column wrap;
         justify-content: space-evenly;
+        @media screen and (max-width: 800px) {
+          grid-column: 1 / span 12;
+          gap: 25px;
+        }
+
+        * {
+          margin: 0;
+        }
+      }
+
+      .col-image {
+        grid-column: 8 / span 4;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: space-evenly;
+        @media screen and (max-width: 800px) {
+          grid-column: 1 / span 12;
+          grid-row: 1;
+          gap: 25px;
+        }
+      }
+
+      .col-text {
+        grid-column: 3 / span 4;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: space-evenly;
+        @media screen and (max-width: 800px) {
+          grid-column: 1 / span 12;
+          grid-row: 2;
+          gap: 25px;
+        }
 
         * {
           margin: 0;
@@ -225,27 +306,11 @@
 
       .thumbnail {
         margin-top: -150px;
+        @media screen and (max-width: 800px) {
+          margin-top: 0;
+          width: 100%;
+        }
       }
-    }
-  }
-
-  .categories {
-    background-color: $white;
-    padding-bottom: rem(120);
-    &_title {
-      margin-bottom: rem(60);
-      margin-top: 0;
-      padding-top: rem(60);
-    }
-    &_list {
-      display: flex;
-      overflow-y: hidden;
-      overflow-x: scroll;
-      flex-flow: nowrap;
-      gap: 60px;
-      padding-bottom: rem(20);
-      padding-left: 80px;
-      margin-bottom: 10px;
     }
   }
 }

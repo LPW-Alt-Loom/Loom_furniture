@@ -4,6 +4,7 @@
     <div class="products_list">
       <div v-for="product in products" :key="product.id">
         <ProductCard
+          :v-if="product.id <= 4"
           :slug="product.slug"
           :name="product.name"
           :images="product.images"
@@ -36,6 +37,13 @@ export default {
     display: flex;
     flex-flow: nowrap;
     justify-content: space-evenly;
+    @media screen and (max-width: 800px) {
+      overflow: scroll;
+      gap: 50px;
+      padding: 50px;
+      justify-content: normal;
+      scroll-snap-type: x mandatory;
+    }
   }
 }
 </style>

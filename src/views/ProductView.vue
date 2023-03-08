@@ -1,7 +1,15 @@
 <template>
   <div class="product-view">
     <div class="product-view_infos">
-      <div class="product-view_gallery">
+      <div v-if="mobile === true" class="product-view_gallery">
+        <img
+          class="product-view_gallery_image"
+          :src="image.src"
+          :alt="image.name"
+          :key="image.id"
+        />
+      </div>
+      <div v-else class="product-view_gallery">
         <img
           class="product-view_gallery_image"
           v-for="image in product.images"
@@ -109,24 +117,23 @@ export default {
     return {
       products: [],
       product: {},
+      image: {},
       category: "",
       tags: "",
+      mobile: false,
     };
   },
+  created() {
+    this.mobile = window.innerWidth < 800;
+  },
   async mounted() {
-    await this.getProductData(this.$route.params.product);
+    const productResponse = wooCommerce.get(
+      "wc/v3/products?slug=" + this.$route.params.product
+    );
+    const productsResponse = wooCommerce.get("wc/v3/products");
 
-    const productsResponse = await wooCommerce.get("wc/v3/products");
-    this.products = productsResponse.data;
-  },
-  async beforeRouteUpdate(to) {
-    await this.getProductData(to.params.product);
-  },
-  methods: {
-    // Get WooCommerce product data by slug
-    async getProductData(slug) {
-      const response = await wooCommerce.get("wc/v3/products?slug=" + slug);
-      this.product = response.data[0];
+    this.getRequest(productResponse, productsResponse).then((values) => {
+      this.product = values[0].data[0];
 
       this.product.categories.forEach((e) => {
         this.category = e.name;
@@ -135,8 +142,19 @@ export default {
       this.product.tags.forEach((e) => {
         this.tags = this.tags + "  -  " + e.name;
       });
-    },
 
+      this.products = values[1].data;
+
+      this.image = this.product.images[0];
+    });
+  },
+  async beforeRouteUpdate(to) {
+    await this.getProductData(to.params.product);
+  },
+  methods: {
+    getRequest: async function (productResponse, categoriesResponse) {
+      return await Promise.all([productResponse, categoriesResponse]);
+    },
     addToCart() {
       this.$store.commit("add", { product: this.product, quantity: 1 });
     },
@@ -153,19 +171,33 @@ export default {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 20px;
+    @media screen and (max-width: 800px) {
+      padding: 40px;
+    }
   }
   &_gallery {
     grid-column: 1 / span 7;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 35px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 35px;
+    @media screen and (max-width: 800px) {
+      grid-column: 1 / span 12;
+    }
     &_image {
-      max-width: 100%;
-      height: 100%;
+      width: 45%;
+      height: 45%;
+      @media screen and (max-width: 800px) {
+        width: 100%;
+        height: auto;
+      }
     }
   }
   &_content {
     grid-column: 9 / span 4;
+    @media screen and (max-width: 800px) {
+      grid-column: 1 / span 12;
+    }
     &_title {
       margin: 0;
     }

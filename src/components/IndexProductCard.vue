@@ -50,6 +50,9 @@ export default {
   padding-top: 60px;
   padding-bottom: 60px;
   background-color: $white;
+  @media screen and (max-width: 800px) {
+    width: 350px;
+  }
   a {
     color: black;
   }

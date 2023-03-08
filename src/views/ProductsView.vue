@@ -209,6 +209,9 @@ export default {
   background-color: $primary-color;
   padding: 35px 80px;
   color: $white;
+  @media screen and (max-width: 800px) {
+    padding: 35px 40px;
+  }
 
   &_title {
     @include title_40;
@@ -222,6 +225,14 @@ export default {
   &_options {
     display: flex;
     justify-content: space-between;
+    flex-flow: row nowrap;
+    @media screen and (max-width: 799px) {
+      justify-content: center;
+      gap: 20px;
+      flex-flow: column;
+      align-items: center;
+    }
+
     &_dropdown {
       position: relative;
       width: 200px;
@@ -265,8 +276,11 @@ export default {
     }
     &_sort {
       display: flex;
-      flex-flow: row nowrap;
       gap: 10px;
+      @media screen and (max-width: 800px) {
+        flex-flow: column;
+        gap: 20px;
+      }
       &_eco {
         display: flex;
         align-items: center;
@@ -300,7 +314,8 @@ export default {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    padding: 50px 0;
+    padding: 50px 0 0 0;
+    @include corps;
   }
 
   &_pagination-button {
@@ -312,6 +327,9 @@ export default {
   .divider {
     margin-top: 15px;
     margin-bottom: 40px;
+    @media screen and (max-width: 800px) {
+      margin-top: 40px;
+    }
   }
 
   &_list {

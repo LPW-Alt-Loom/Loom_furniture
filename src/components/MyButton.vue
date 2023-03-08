@@ -21,7 +21,7 @@ export default {
   display: block;
   width: 100%;
   @include button;
-  height: 50px;
+  min-height: 50px;
   padding: 15px;
   text-align: center;
   &.-primary {
