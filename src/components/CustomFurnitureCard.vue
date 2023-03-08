@@ -23,39 +23,44 @@
     </div>
     <div class="card_image">
       <img
-        src="https://via.placeholder.com/800x400"
+        src="/assets/images/custom_block.png"
         class="img-fluid rounded-start"
-        alt="example"
+        alt="meuble"
       />
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 .card {
-  max-width: 1700px;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  background-color: $toned-color;
-  height: 700px;
-  margin: auto auto 125px;
+  width: 80%;
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 90px auto;
+  @media screen and (max-width: 800px) {
+    flex-flow: column-reverse;
+  }
   .card_body {
-    * {
-      margin: 0;
-    }
-    grid-column: 1 / 6;
+    background-color: $toned-color;
     display: flex;
     flex-flow: column wrap;
     justify-content: space-evenly;
+    align-self: stretch;
     padding: 75px 100px;
+    @media screen and (max-width: 800px) {
+      padding: 40px;
+      gap: 15px;
+    }
+    * {
+      margin: 0;
+    }
     .card_text {
       @include corps;
     }
   }
   .card_image {
-    grid-column: 6 / 13;
+    width: 100%;
     img {
       width: 100%;
-      height: 100%;
     }
   }
 }

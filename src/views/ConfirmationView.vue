@@ -7,14 +7,10 @@
         color="primary"
         :text="`Merci pour votre commande ${order.billing.first_name} ${order.billing.last_name} !`"
       />
-      <h1>
-        Merci pour votre commande {{ order.billing.first_name }}
-        {{ order.billing.last_name }} !
-      </h1>
 
       <MyTitle
         text="Récapitulatif de la commande"
-        size="small"
+        size="order_subtitle"
         type="h2"
         color="primary"
       />
@@ -50,8 +46,11 @@ export default {
 };
 </script>
 <style lang="scss">
-p,
-li {
-  @include corps;
+.confirmation-view {
+  padding: 60px;
+  p,
+  li {
+    @include corps;
+  }
 }
 </style>

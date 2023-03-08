@@ -79,10 +79,16 @@ export default {
 <style lang="scss" scoped>
 .cart {
   padding: 80px;
+  @media screen and (max-width: 800px) {
+    padding: 25px;
+  }
   &_content {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(2, 1fr) auto;
+    @media screen and (max-width: 800px) {
+      grid-template-rows: auto 1fr auto;
+    }
     gap: 20px;
     h2 {
       text-align: center;
@@ -90,10 +96,15 @@ export default {
     }
     &_image {
       &_section {
-        grid-column: 1 / span 8;
+        grid-column: 1 / span 9;
         grid-row: 1 / span 3;
         background-color: $grey;
         padding: 60px;
+        @media screen and (max-width: 800px) {
+          grid-column: 1 / span 12;
+          grid-row: 1;
+          padding: 30px;
+        }
       }
       &_src {
         width: 100%;
@@ -101,13 +112,19 @@ export default {
     }
     &_infos {
       &_product {
-        grid-column: 9 / span 4;
+        grid-column: 10 / span 3;
         grid-row: 1 / span 2;
         background-color: $grey;
         padding: 60px;
         display: flex;
         justify-content: space-between;
         flex-flow: column;
+        @media screen and (max-width: 800px) {
+          grid-column: 1 / span 12;
+          grid-row: 2;
+          gap: 20px;
+          padding: 30px;
+        }
         * {
           margin: 0;
         }
@@ -125,17 +142,21 @@ export default {
         }
       }
       &_validation {
-        grid-column: 9 / span 4;
-        grid-row: 3 / span 1;
+        grid-column: 10 / span 3;
+        grid-row: 3;
         background-color: $grey;
         padding: 60px;
+        @media screen and (max-width: 800px) {
+          grid-column: 1 / span 12;
+          padding: 30px;
+        }
       }
     }
   }
 }
 
 .cart_empty {
-  margin: auto;
-  width: 500px;
+  margin: auto auto 120px auto;
+  width: 50%;
 }
 </style>

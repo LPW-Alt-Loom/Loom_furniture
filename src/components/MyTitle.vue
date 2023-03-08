@@ -32,23 +32,45 @@ export default {
     margin-top: 0;
     margin-bottom: 60px;
     padding-top: 60px;
+    @media screen and (max-width: 800px) {
+      font-size: rem(30);
+    }
   }
   &.-cart_title {
     font-size: rem(60);
     margin-top: 0;
     margin-bottom: 60px;
+    @media screen and (max-width: 800px) {
+      font-size: rem(30);
+    }
   }
   &.-order_title {
     font-size: rem(60);
     margin: 0;
+    @media screen and (max-width: 800px) {
+      font-size: rem(30);
+    }
+  }
+  &.-order_subtitle {
+    font-size: rem(50);
+    @media screen and (max-width: 800px) {
+      font-size: rem(25);
+    }
   }
   &.-big_corps {
     font-family: "pp_moriregular_italic", sans-serif;
     font-weight: 400;
+    @media screen and (max-width: 800px) {
+      font-size: rem(30);
+    }
   }
   &.-medium {
     font-size: rem(40);
     line-height: rem(50);
+    @media screen and (max-width: 800px) {
+      font-size: rem(30);
+      line-height: rem(40);
+    }
   }
   &.-small {
     font-size: rem(30);

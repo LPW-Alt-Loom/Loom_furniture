@@ -305,7 +305,7 @@
             <input
               class="order-view_input"
               id="expiration"
-              type="date"
+              type="month"
               :min="dates.min"
               :max="dates.max"
               v-model="payment.date"
@@ -464,25 +464,45 @@ export default {
 </script>
 <style lang="scss">
 .order-view {
+  width: 100%;
   padding: 60px;
   &_step {
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
+    @media screen and (max-width: 800px) {
+      grid-template-columns: 1fr;
+    }
     h2 {
       grid-column: 1 / span 2;
+      @media screen and (max-width: 800px) {
+        grid-column: 1;
+      }
     }
   }
   .delivery_address {
     grid-column: 1 / span 2;
+    @media screen and (max-width: 800px) {
+      grid-column: 1;
+    }
   }
   &_shipping {
     grid-column: 1 / span 2;
+    @media screen and (max-width: 800px) {
+      grid-column: 1;
+    }
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    @media screen and (max-width: 800px) {
+      grid-template-columns: 1fr;
+    }
     h2 {
       grid-column: 1 / span 2;
+      @media screen and (max-width: 800px) {
+        grid-column: 1;
+      }
     }
   }
   &_field {
@@ -515,6 +535,10 @@ export default {
     grid-column: 1 / span 2;
     display: flex;
     gap: 30px;
+    @media screen and (max-width: 800px) {
+      grid-column: 1;
+      flex-flow: column;
+    }
   }
 }
 </style>

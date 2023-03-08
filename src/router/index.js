@@ -45,6 +45,16 @@ const router = createRouter({
       name: "cart-order-thank-you",
       component: () => import("../views/ConfirmationView.vue"),
     },
+    {
+      path: "/privacy-policy",
+      name: "privacy-policy",
+      component: () => import("../views/PrivacyPolicy.vue"),
+    },
+    {
+      path: "/legal-notice",
+      name: "legal-notice",
+      component: () => import("../views/LegalNotice.vue"),
+    },
   ],
 });
 
