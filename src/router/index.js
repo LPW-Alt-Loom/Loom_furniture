@@ -15,20 +15,24 @@ const router = createRouter({
       component: () => import("../views/AboutView.vue"),
     },
     {
-      path: "/products",
+      path: "/materials",
+      name: "materials",
+      component: () => import("../views/OurMaterials.vue"),
+    },
+    {
+      path: "/process",
+      name: "process",
+      component: () => import("../views/OurProcess.vue"),
+    },
+    {
+      path: "/products/:category",
       name: "products",
       component: () => import("../views/ProductsView.vue"),
     },
     {
-      path: "/products/:product",
+      path: "/products/product/:product",
       name: "products-product",
       component: () => import("../views/ProductView.vue"),
-    },
-    {
-      path: "/category/:category",
-      name: "category-category",
-
-      component: () => import("../views/CategoryView.vue"),
     },
     {
       path: "/cart/",

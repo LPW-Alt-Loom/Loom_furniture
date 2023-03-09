@@ -1,5 +1,5 @@
 <template>
-  <main class="home-view">
+  <main v-if="ready" class="home-view">
     <!--  Carousel  -->
     <div class="carousel">
       <div class="carousel_img">
@@ -15,7 +15,7 @@
         <MyButton
           type="outline_white"
           text="Découvrir nos meubles"
-          link="/products"
+          link="/products/all"
         />
       </div>
     </div>
@@ -42,12 +42,13 @@
           :key="category.id"
           class="categories_list_category"
         >
-          <a href="https://placeholder.com"
-            ><img
+          <RouterLink :to="`/products/${category.slug}`">
+            <img
               class="categories_list_category_image"
-              src="https://via.placeholder.com/200x300"
-              alt="oui"
-          /></a>
+              :src="category.image.src"
+              :alt="category.name"
+            />
+          </RouterLink>
           <p class="categories_list_category_title">{{ category.name }}</p>
         </div>
       </div>
@@ -78,7 +79,7 @@
             longue durée de vie et nous vous offrons également, une garantie à
             vie pour chaque meuble que vous achetez sur Loom Furnitures.
           </p>
-          <MyButton type="toned" text="En savoir plus" link="/" />
+          <MyButton type="toned" text="En savoir plus" link="/materials" />
         </div>
       </div>
     </div>
@@ -107,7 +108,7 @@
             afin de garantir la meilleure qualité que l’on puisse trouver dans
             le monde de l’ameublement.
           </p>
-          <MyButton type="primary" text="En savoir plus" link="/" />
+          <MyButton type="primary" text="En savoir plus" link="/process" />
         </div>
         <div class="col-image">
           <img
@@ -153,6 +154,9 @@
       </div>
     </div>
   </main>
+  <main v-else>
+    <PageLoader />
+  </main>
 </template>
 <style lang="scss">
 .home-view {
@@ -168,7 +172,7 @@
     }
 
     .carousel_content {
-      left: 27%;
+      left: 24%;
       top: 33%;
       position: absolute;
       max-width: 350px;
@@ -182,7 +186,7 @@
 
   .categories {
     background-color: $white;
-    padding-bottom: rem(200);
+    padding-bottom: 150px;
     @media screen and (max-width: 800px) {
       padding-bottom: 40px;
     }
@@ -196,10 +200,21 @@
       overflow-y: hidden;
       overflow-x: scroll;
       flex-flow: nowrap;
-      gap: 60px;
+      gap: 40px;
       padding-bottom: rem(20);
-      padding-left: 80px;
       margin-bottom: 10px;
+      justify-content: space-evenly;
+      @media screen and (max-width: 800px) {
+        padding-right: 80px;
+        padding-left: 80px;
+        gap: 60px;
+        justify-content: normal;
+      }
+      &_category {
+        &_image {
+          width: 200px;
+        }
+      }
     }
   }
 
@@ -322,9 +337,11 @@ import BestSalerProducts from "@/components/BestSalerProducts.vue";
 
 import { wooCommerce } from "@/utils/axios.js";
 import CustomFurnitureCard from "@/components/CustomFurnitureCard.vue";
+import PageLoader from "@/components/PageLoader.vue";
 
 export default {
   components: {
+    PageLoader,
     CustomFurnitureCard,
     MyButton,
     MyTitle,
@@ -336,6 +353,7 @@ export default {
       products: [],
       categories: [],
       page: {},
+      ready: false,
     };
   },
   async mounted() {
@@ -343,11 +361,15 @@ export default {
     const productResponse = wooCommerce.get("/wc/v3/products");
     const categoriesResponse = wooCommerce.get("/wc/v3/products/categories");
 
-    this.getRequest(productResponse, categoriesResponse).then((values) => {
-      // Utilisez les valeurs retournées ici
-      this.products = values[0].data;
-      this.categories = values[1].data;
-    });
+    await this.getRequest(productResponse, categoriesResponse).then(
+      (values) => {
+        // Utilisez les valeurs retournées ici
+        this.products = values[0].data;
+        this.categories = values[1].data;
+      }
+    );
+
+    this.ready = true;
   },
   methods: {
     getRequest: async function (productResponse, categoriesResponse) {

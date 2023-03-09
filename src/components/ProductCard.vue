@@ -1,6 +1,6 @@
 <template>
   <div class="product">
-    <RouterLink :to="`/products/${slug}`">
+    <RouterLink :to="`/products/product/${slug}`">
       <img v-if="image" class="product_image" :src="image" alt="" />
       <div class="product_content">
         <p class="product_content_name">{{ name }}</p>
