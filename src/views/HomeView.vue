@@ -206,7 +206,9 @@
       justify-content: space-evenly;
       @media screen and (max-width: 800px) {
         padding-right: 80px;
+        padding-left: 80px;
         gap: 60px;
+        justify-content: normal;
       }
       &_category {
         &_image {

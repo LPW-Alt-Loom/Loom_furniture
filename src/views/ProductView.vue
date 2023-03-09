@@ -63,7 +63,6 @@
           </ul>
         </div>
         <div v-if="product.dimensions" class="product-view_content_dimensions">
-          j
           <MyTitle
             size="small"
             color="primary"
