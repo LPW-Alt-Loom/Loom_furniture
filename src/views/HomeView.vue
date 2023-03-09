@@ -358,7 +358,7 @@ export default {
   },
   async mounted() {
     // Get all woocommerce products
-    const productResponse = wooCommerce.get("/wc/v3/products");
+    const productResponse = wooCommerce.get("/wc/v3/products?per_page=100");
     const categoriesResponse = wooCommerce.get("/wc/v3/products/categories");
 
     await this.getRequest(productResponse, categoriesResponse).then(

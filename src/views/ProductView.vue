@@ -135,7 +135,7 @@ export default {
     const productResponse = wooCommerce.get(
       "wc/v3/products?slug=" + this.$route.params.product
     );
-    const productsResponse = wooCommerce.get("wc/v3/products");
+    const productsResponse = wooCommerce.get("wc/v3/products?per_page=100");
 
     await this.getRequest(productResponse, productsResponse).then((values) => {
       this.product = values[0].data[0];

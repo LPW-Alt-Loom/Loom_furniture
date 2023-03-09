@@ -179,7 +179,7 @@ export default {
   },
   async mounted() {
     // Get all woocommerce products
-    const productResponse = wooCommerce.get("/wc/v3/products");
+    const productResponse = wooCommerce.get("/wc/v3/products?per_page=100");
     const categoriesResponse = wooCommerce.get("/wc/v3/products/categories");
     const tagsResponse = wooCommerce.get("/wc/v3/products/tags");
 
@@ -188,6 +188,7 @@ export default {
       categoriesResponse,
       tagsResponse
     ).then((values) => {
+      console.log(values);
       this.products = values[0].data;
       this.categories = values[1].data;
       this.tags = values[2].data;
