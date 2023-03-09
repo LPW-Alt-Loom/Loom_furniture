@@ -1,5 +1,5 @@
 <template>
-  <RouterLink :to="`/products/${slug}`">
+  <RouterLink :to="`/products/product/${slug}`">
     <div class="product">
       <img v-if="image" :src="image" alt="" class="product_image" />
       <p class="product_name">{{ name }}</p>
@@ -51,7 +51,8 @@ export default {
   padding-bottom: 60px;
   background-color: $white;
   @media screen and (max-width: 800px) {
-    width: 350px;
+    max-width: 80%;
+    margin: auto;
   }
   a {
     color: black;
@@ -60,8 +61,8 @@ export default {
     border-radius: 5px;
     margin: auto;
     display: block;
-    width: 287px;
-    height: 287px;
+    width: 80%;
+    height: 80%;
   }
   &_name {
     width: 100%;

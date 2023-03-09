@@ -38,10 +38,10 @@
       <MyTitle color="white" type="h3" size="small" text="E-commerce" />
       <ul class="footer_list">
         <li class="footer_list-item">
-          <RouterLink class="footer_link" to="/products">Profil</RouterLink>
+          <RouterLink class="footer_link" to="/products/all">Profil</RouterLink>
         </li>
         <li class="footer_list-item">
-          <RouterLink class="footer_link" to="/products"
+          <RouterLink class="footer_link" to="/products/all"
             >Mes Commandes</RouterLink
           >
         </li>
@@ -49,7 +49,7 @@
           <RouterLink class="footer_link" to="/cart">Se déconnecter</RouterLink>
         </li>
         <li class="footer_list-item">
-          <RouterLink class="footer_link" to="/products">
+          <RouterLink class="footer_link" to="/privacy-policy">
             Conditions Générales de Ventes
           </RouterLink>
         </li>
@@ -59,18 +59,22 @@
       <MyTitle color="white" type="h3" size="small" text="Navigation" />
       <ul class="footer_list">
         <li class="footer_list-item">
-          <RouterLink class="footer_link" to="/products">Catalogue</RouterLink>
+          <RouterLink class="footer_link" to="/products/all"
+            >Catalogue</RouterLink
+          >
         </li>
-        <!--        <li class="footer_navigation-item">-->
-        <!--          <RouterLink class="footer_link" to="/products"-->
-        <!--            >Créer mon meuble</RouterLink-->
-        <!--          >-->
-        <!--        </li>-->
+        <li class="footer_navigation-item">
+          <RouterLink class="footer_link" to="/products/all"
+            >Créer mon meuble</RouterLink
+          >
+        </li>
         <li class="footer_list-item">
           <RouterLink class="footer_link" to="/cart">Panier</RouterLink>
         </li>
         <li class="footer_list-item">
-          <RouterLink class="footer_link" to="/products">Mon profil</RouterLink>
+          <RouterLink class="footer_link" to="/products/all"
+            >Mon profil</RouterLink
+          >
         </li>
       </ul>
     </div>
@@ -78,9 +82,9 @@
   <div class="copyright">
     <img src="/assets/images/made_in_britain.png" alt="logo make in britain" />
     <div>
-      <RouterLink to="">Mentions légales</RouterLink>
+      <RouterLink to="/legal-notice">Mentions légales</RouterLink>
       |
-      <RouterLink to="">Politique de confidentialité</RouterLink>
+      <RouterLink to="/privacy-policy">Politique de confidentialité</RouterLink>
     </div>
   </div>
 </template>

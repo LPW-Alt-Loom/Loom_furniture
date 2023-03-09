@@ -57,7 +57,11 @@
   </div>
   <div v-else class="cart_empty">
     <MyTitle size="big" color="primary" text="Le panier est vide" type="h1" />
-    <MyButton text="Retourner au catalogue" link="/products" type="primary" />
+    <MyButton
+      text="Retourner au catalogue"
+      link="/products/all"
+      type="primary"
+    />
   </div>
 </template>
 <script>
@@ -84,8 +88,12 @@ export default {
   }
   &_content {
     display: grid;
+    padding: 0 150px;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(2, 1fr) auto;
+    @media screen and (max-width: 800px) {
+      padding: 0;
+    }
     @media screen and (max-width: 800px) {
       grid-template-rows: auto 1fr auto;
     }

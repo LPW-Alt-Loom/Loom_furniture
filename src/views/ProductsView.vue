@@ -1,5 +1,5 @@
 <template>
-  <div class="products-view">
+  <div v-if="ready" class="products-view">
     <h1 class="products-view_title">Notre catalogue</h1>
     <div class="products-view_description">
       <p>
@@ -36,6 +36,16 @@
               :name="category.slug"
               :id="category.slug"
               :value="category.slug"
+              v-if="$route.params.category === category.slug"
+              checked
+            />
+            <input
+              type="checkbox"
+              v-model="choicenCategories"
+              :name="category.slug"
+              :id="category.slug"
+              :value="category.slug"
+              v-else
             />
             <label :for="category.slug">{{ category.name }}</label>
           </li>
@@ -87,16 +97,20 @@
       >
     </div>
   </div>
+  <div v-else>
+    <PageLoader />
+  </div>
 </template>
 
 <script>
 import { wooCommerce } from "@/utils/axios";
 import IndexProductCard from "@/components/IndexProductCard.vue";
+import PageLoader from "@/components/PageLoader.vue";
 export default {
   components: {
+    PageLoader,
     IndexProductCard,
   },
-
   data() {
     return {
       products: [],
@@ -104,17 +118,25 @@ export default {
       choicenCategories: [],
       tags: [],
       choicenTags: [],
+      isChecked: "",
       price: null,
       page: 0,
-      byPage: 4,
+      byPage: 12,
       displayDropdown: false,
+      mobile: false,
+      ready: false,
     };
   },
 
   watch: {
     filteredProducts: "onFilteredProductsChange",
   },
-
+  created() {
+    this.mobile = window.innerWidth < 800;
+    if (this.mobile) {
+      this.byPage = 4;
+    }
+  },
   computed: {
     // Filtered array based on this.products and this.filters
     filteredProducts() {
@@ -155,21 +177,24 @@ export default {
       );
     },
   },
-  mounted() {
+  async mounted() {
     // Get all woocommerce products
     const productResponse = wooCommerce.get("/wc/v3/products");
     const categoriesResponse = wooCommerce.get("/wc/v3/products/categories");
     const tagsResponse = wooCommerce.get("/wc/v3/products/tags");
 
-    this.getRequest(productResponse, categoriesResponse, tagsResponse).then(
-      (values) => {
-        this.products = values[0].data;
-        this.categories = values[1].data;
-        this.tags = values[2].data;
-      }
-    );
-  },
+    await this.getRequest(
+      productResponse,
+      categoriesResponse,
+      tagsResponse
+    ).then((values) => {
+      this.products = values[0].data;
+      this.categories = values[1].data;
+      this.tags = values[2].data;
+    });
 
+    this.ready = true;
+  },
   methods: {
     //Open filters options
     onDropdownClick() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="product-view">
+  <div v-if="ready" class="product-view">
     <div class="product-view_infos">
       <div v-if="mobile === true" class="product-view_gallery">
         <img
@@ -63,6 +63,7 @@
           </ul>
         </div>
         <div v-if="product.dimensions" class="product-view_content_dimensions">
+          j
           <MyTitle
             size="small"
             color="primary"
@@ -103,6 +104,9 @@
       <BestSalerProducts title="Nos autres créations" :products="products" />
     </div>
   </div>
+  <div v-else>
+    <PageLoader />
+  </div>
 </template>
 
 <script>
@@ -110,9 +114,10 @@ import { wooCommerce } from "@/utils/axios";
 import MyButton from "@/components/MyButton.vue";
 import MyTitle from "@/components/MyTitle.vue";
 import BestSalerProducts from "@/components/BestSalerProducts.vue";
+import PageLoader from "@/components/PageLoader.vue";
 
 export default {
-  components: { BestSalerProducts, MyButton, MyTitle },
+  components: { PageLoader, BestSalerProducts, MyButton, MyTitle },
   data() {
     return {
       products: [],
@@ -121,6 +126,7 @@ export default {
       category: "",
       tags: "",
       mobile: false,
+      ready: false,
     };
   },
   created() {
@@ -132,7 +138,7 @@ export default {
     );
     const productsResponse = wooCommerce.get("wc/v3/products");
 
-    this.getRequest(productResponse, productsResponse).then((values) => {
+    await this.getRequest(productResponse, productsResponse).then((values) => {
       this.product = values[0].data[0];
 
       this.product.categories.forEach((e) => {
@@ -147,9 +153,8 @@ export default {
 
       this.image = this.product.images[0];
     });
-  },
-  async beforeRouteUpdate(to) {
-    await this.getProductData(to.params.product);
+
+    this.ready = true;
   },
   methods: {
     getRequest: async function (productResponse, categoriesResponse) {

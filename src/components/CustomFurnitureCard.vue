@@ -19,7 +19,7 @@
         Du marbre au chêne centenaire en passant par de l’érable torréfié. Nous
         vous proposons un large choix pour coller à vos envie et vos intérieurs.
       </p>
-      <MyButton type="primary" text="Je crée mon meuble" link="/" />
+      <MyButton type="primary" text="Je crée mon meuble" />
     </div>
     <div class="card_image">
       <img

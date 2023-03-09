@@ -2,9 +2,8 @@
   <div class="products">
     <MyTitle type="h2_uppercase" size="big" :text="title" color="white" />
     <div class="products_list">
-      <div v-for="product in products" :key="product.id">
+      <div v-for="product in products.slice(0, 4)" :key="product.id">
         <ProductCard
-          :v-if="product.id <= 4"
           :slug="product.slug"
           :name="product.name"
           :images="product.images"

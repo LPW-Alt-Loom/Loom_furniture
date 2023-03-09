@@ -4,18 +4,20 @@
       <RouterLink class="header__link header__title" to="/">LOOM</RouterLink>
       <ul id="list" class="header__navigation">
         <li class="header__navigation-item">
-          <RouterLink class="header__link" to="/products">Catalogue</RouterLink>
+          <RouterLink class="header__link" to="/products/all"
+            >Catalogue</RouterLink
+          >
         </li>
-        <!--        <li class="header__navigation-item">-->
-        <!--          <RouterLink class="header__link" to="/products"-->
-        <!--            >Créer mon meuble</RouterLink-->
-        <!--          >-->
-        <!--        </li>-->
+        <li class="header__navigation-item">
+          <RouterLink class="header__link" to="/products/all"
+            >Créer mon meuble</RouterLink
+          >
+        </li>
         <li class="header__navigation-item">
           <RouterLink class="header__link" to="/cart">Panier</RouterLink>
         </li>
         <li class="header__navigation-item">
-          <RouterLink class="header__link" to="/products"
+          <RouterLink class="header__link" to="/products/all"
             >Mon profil</RouterLink
           >
         </li>
