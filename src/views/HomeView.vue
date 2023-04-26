@@ -148,6 +148,7 @@
             la finition de tous ses éléments. Envie d’un plateau en marbre ? De
             pieds en laiton ? Ou encore de poignées avec une finition brossée ?
             Chez Loom Furnitures tout est possible pour nos client.
+            reuf
           </p>
           <MyButton type="primary" text="Je crée mon meuble" link="/" />
         </div>
